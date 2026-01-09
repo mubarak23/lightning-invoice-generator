@@ -3,7 +3,7 @@
  * Generates Lightning Network invoices from Lightning addresses
  */
 
-interface lnurlPayResponse {
+interface LnurlPayResponse {
   callback: string,
   maxSendable: number,
   minSendable: number,
@@ -27,7 +27,7 @@ export class LightningInvoiceGenerator {
   async getInvoice(
     lightningAddress: string,
     amountSats: number
-  ): Promise<String> {
+  ): Promise<string> {
     // validate inputs
     this.validateLightningAddress(lightningAddress);
     this.validateAmount(amountSats);
@@ -48,7 +48,7 @@ export class LightningInvoiceGenerator {
         throw new Error(`Failed to fetch LNURL endpoint: ${lnurlResponse.status}`)
       }
 
-      const lnurlData: lnurlPayResponse = await lnurlResponse.json() as lnurlPayResponse;
+      const lnurlData: LnurlPayResponse = await lnurlResponse.json() as LnurlPayResponse;
 
       const amountMillisats = amountSats * 1000;
       if (amountMillisats < lnurlData.minSendable) {
@@ -111,4 +111,23 @@ export class LightningInvoiceGenerator {
   }
 
 }
+
+
+/**
+ * Convenience function to generate a Lightning invoice
+ * @param lightningAddress - Lightning address (e.g., user@domain.com)
+ * @param amountSats - Amount in satoshis
+ * @returns Lightning invoice (BOLT11 payment request)
+ */
+
+export async function generateInvoice(
+  lightningAddress: string,
+  amountSats: number
+): Promise<string> {
+  const generator = new LightningInvoiceGenerator();
+  return generator.getInvoice(lightningAddress, amountSats);
+}
+
+
+export type { LnurlPayResponse, InvoiceResponse };
 
