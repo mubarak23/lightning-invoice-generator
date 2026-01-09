@@ -1,0 +1,22 @@
+{
+  "name": "ls",
+  "version": "1.0.0",
+  "description": "Generates Lightning Network invoices from Lightning addresses",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mubarak23/lightning-invoice-generator.git"
+  },
+  "keywords": [
+    "bitcoin"
+  ],
+  "author": "Mubarak Muhammad Aminu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mubarak23/lightning-invoice-generator/issues"
+  },
+  "homepage": "https://github.com/mubarak23/lightning-invoice-generator#readme"
+}
